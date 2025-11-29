@@ -46,12 +46,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
       - name: Install dependencies
         run: npm ci
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
       # display dist directory contents for debugging
       - name: Show dist directory contents (DEBUG)
         run: ls -l dist/
@@ -84,7 +78,7 @@ jobs:
         run: git rev-parse HEAD && git log --oneline -5
 
       - name: Check npm versions (DEBUG)
-        run: npm view mui-tiptap-editor versions --json
+        run: npm view eslint-plugin-external-import-esm versions --json
 
       # Publish the package to NPM using semantic-release
       - name: Publish package on NPM 📦
