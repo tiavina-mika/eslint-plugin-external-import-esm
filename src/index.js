@@ -10,7 +10,9 @@ module.exports = {
     },
     configs: {
         recommended: {
-            plugins: ['external-import-esm'],
+            plugins: {
+                'external-import-esm': module.exports,
+            },
             rules: {
                 'external-import-esm/require-external-js-extension': 'error'
             }
