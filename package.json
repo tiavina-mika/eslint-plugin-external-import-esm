@@ -42,7 +42,7 @@
     "prettier": "^3.7.2"
   },
   "scripts": {
-    "test": "mocha \"test/**/*.spec.*js\"",
+    "test": "mocha \"test/**/*.spec.cjs\"",
     "lint": "npm-run-all \"lint:*\"",
     "lint:docs": "markdownlint \"**/*.md\"",
     "lint:eslint-docs": "npm run update:eslint-docs",
