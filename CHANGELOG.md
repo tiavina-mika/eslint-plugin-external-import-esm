@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.9 (2025-11-29)
+
+* fix: error message ([430ba0e](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/430ba0e))
+
 ## 1.0.8 (2025-11-29)
 
 * fix: config ([c09eb52](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/c09eb52))
