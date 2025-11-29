@@ -4,7 +4,7 @@ const plugin = require('../../src');
 RuleTester.setDefaultConfig({
     languageOptions: {
         ecmaVersion: 2020,
-        sourceType: "module",
+        // sourceType: "module",
     },
 });
 
@@ -25,8 +25,20 @@ ruleTester.run('require-external-js-extension', plugin.rules['require-external-j
     { code: "const queue = require('async/queue');" },
   ],
   invalid: [
-    { code: "import queue from 'async/queue';", errors: [{ message: "External import detected: 'async/queue'" }] },
-    { code: "import throttle from 'lodash/throttle';", errors: [{ message: "External import detected: 'lodash/throttle'" }] },
-    { code: "import 'dayjs/locale/en';", errors: [{ message: "External import detected: 'dayjs/locale/de'" }] }
+    {
+      code: "import queue from 'async/queue';",
+      output: "import queue from 'async/queue.js';",
+      errors: [{ messageId: "missingJsExtension", data: { importPath: 'async/queue' } }]
+    },
+    {
+      code: "import throttle from 'lodash/throttle';",
+      output: "import throttle from 'lodash/throttle.js';",
+      errors: [{ messageId: "missingJsExtension", data: { importPath: 'lodash/throttle' } }]
+    },
+    {
+      code: "import 'dayjs/locale/en';",
+      output: "import 'dayjs/locale/en.js';",
+      errors: [{ messageId: "missingJsExtension", data: { importPath: 'dayjs/locale/en' } }]
+    }
   ]
 });

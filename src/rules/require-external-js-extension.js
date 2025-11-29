@@ -9,6 +9,9 @@ module.exports = {
     },
     schema: [],
     fixable: "code",
+    messages: {
+      missingJsExtension: "External import detected: '{{importPath}}'"
+    }
   },
  create(context) {
     return {
@@ -32,7 +35,8 @@ module.exports = {
           if (!source.endsWith(".js")) {
             context.report({
               node,
-              message: "External module subpath imports must include a .js extension",
+              messageId: "missingJsExtension",
+              data: { importPath: source },
               fix(fixer) {
                 return fixer.replaceText(node.source, `'${source}.js'`);
               }
