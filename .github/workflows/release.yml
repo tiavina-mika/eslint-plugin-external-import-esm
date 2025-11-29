@@ -1,0 +1,108 @@
+# GitHub Actions workflow to automate release and publishing to NPM
+# This workflow is triggered on pushes to the main branch.
+
+name: Release & Publish
+run-name: Release & publish to npm by ${{ github.actor }} 🚀
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
+  # Release job to publish the package to NPM
+  release:
+    runs-on: ubuntu-latest
+    # Semantic-release needs write permissions to create releases
+    # and to comment on issues and pull requests
+    permissions:
+      contents: write # for tags and commits
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+    needs: [test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Download the build artifact from the build job so we don't need to rebuild
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      # display dist directory contents for debugging
+      - name: Show dist directory contents (DEBUG)
+        run: ls -l dist/
+
+      - name: Show existing git tags (DEBUG)
+        run: git tag -l | sort -V
+
+      # Configure npm to use the NPM_TOKEN secret for authentication
+      - name: Configure npm
+        run: |
+          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+          cat .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Show if .npmrc is created (DEBUG)
+        run: ls -l .npmrc
+
+      - name: Validate NPM Token (DEBUG)  # Garde tes debugs
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "Token length: $(echo -n $NPM_TOKEN | wc -c)"
+          if npm whoami --registry=https://registry.npmjs.org/ > /dev/null 2>&1; then
+            echo "NPM Token: VALID"
+          else
+            echo "NPM Token: INVALID"
+          fi
+      - name: Show 5 most recent commits (DEBUG)
+        run: git rev-parse HEAD && git log --oneline -5
+
+      - name: Check npm versions (DEBUG)
+        run: npm view mui-tiptap-editor versions --json
+
+      # Publish the package to NPM using semantic-release
+      - name: Publish package on NPM 📦
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release --debug
+
+      # Optional: Show the NPM package link after publishing
+      - name: Show NPM package link (DEBUG)
+        run: echo "Published to NPM 🚀- https://www.npmjs.com/package/${{ github.event.repository.name }}"
