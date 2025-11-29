@@ -12,50 +12,40 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    needs: lint
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Install dependencies
         run: npm ci
-
       - name: Run tests
         run: npm run test
-  # Release job to publish the package to NPM
+
   release:
     runs-on: ubuntu-latest
-    # Semantic-release needs write permissions to create releases
-    # and to comment on issues and pull requests
     permissions:
-      contents: write # for tags and commits
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
     needs: [test]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org/'
-
       - name: Install dependencies
         run: npm ci
-
-      # Download the build artifact from the build job so we don't need to rebuild
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
