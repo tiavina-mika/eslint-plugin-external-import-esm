@@ -46,9 +46,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
       - name: Install dependencies
         run: npm ci
-      # display dist directory contents for debugging
-      - name: Show dist directory contents (DEBUG)
-        run: ls -l dist/
 
       - name: Show existing git tags (DEBUG)
         run: git tag -l | sort -V
