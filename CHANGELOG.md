@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 (2025-11-29)
+
+* fix: lint ([5e5758a](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/5e5758a))
+* fix: workflow ([76ff786](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/76ff786))
+
 ## 1.0.0 (2025-11-29)
 
 * Create require-external-js-extension.spec.js ([63f2119](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/63f2119))
