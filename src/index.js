@@ -6,7 +6,7 @@ module.exports = {
         version
     },
     rules: {
-        'require-external-js-extension': require('./rules/require-external-js-extension')
+        'require-external-js-extension': require('./rules/require-external-js-extension.cjs')
     },
     configs: {
         recommended: {
