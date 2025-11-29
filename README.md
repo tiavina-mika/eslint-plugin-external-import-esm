@@ -47,8 +47,9 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
     },
+    // Or override the rule here:
     rules: {
-      'external-import-esm/require-external-js-extension': 'error'
+      'external-import-esm/require-external-js-extension': 'warn',
     },
   },
 ];
