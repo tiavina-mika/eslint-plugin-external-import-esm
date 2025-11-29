@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 (2025-11-29)
+
+* Merge branch 'main' of https://github.com/tiavina-mika/eslint-plugin-external-import-esm ([5ea7631](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/5ea7631))
+* fix: doc ([19c42e8](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/19c42e8))
+
 ## 1.0.1 (2025-11-29)
 
 * fix: lint ([5e5758a](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/5e5758a))
