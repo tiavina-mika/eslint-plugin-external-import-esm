@@ -62,5 +62,4 @@ import localModule from './local'; // Relative import, no .js needed
 
 ## Documentation
     
-See [docs/rules/require-external-js-extension.md](eslint-plugin-external-import-esm
-/docs/rules/require-external-js-extension.md) for full details and examples.
+See [eslint-plugin-external-import-esm/docs/rules/require-external-js-extension.md](docs/rules/require-external-js-extension.md) for full details and examples.
