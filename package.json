@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-external-import-esm",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "ESLint plugin to enforce using .js file extensions for external imports in ESM projects",
   "main": "src/index.js",
   "keywords": [
