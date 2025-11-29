@@ -10,7 +10,8 @@ module.exports = {
     schema: [],
     fixable: "code",
     messages: {
-      missingJsExtension: "External import detected: '{{importPath}}'"
+      // This is the message displayed when the rule is violated
+      missingJsExtension: "Expected .js extension for external import '{{ importPath }}'."
     }
   },
  create(context) {
