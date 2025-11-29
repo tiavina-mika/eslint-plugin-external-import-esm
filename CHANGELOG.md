@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5 (2025-11-29)
+
+* fix: doc ([e8de60c](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/e8de60c))
+
 ## 1.0.4 (2025-11-29)
 
 * fix: doc ([d21574f](https://github.com/tiavina-mika/eslint-plugin-external-import-esm/commit/d21574f))
