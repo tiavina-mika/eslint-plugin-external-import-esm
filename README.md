@@ -34,13 +34,24 @@ npm install eslint-plugin-external-import-esm --save-dev
 <!-- end auto-generated rules list -->
 
 ## Usage
-```jsonc
-{
-  "plugins": ["external-import-esm"],
-  "rules": {
-    "external-import-esm/require-external-js-extension": "error"
-  }
-}
+```js
+import externalImportEsm from 'eslint-plugin-external-import-esm';
+import js from '@eslint/js';
+
+export default [
+  js.configs.recommended,
+  externalImportEsm.configs.recommended,
+  {
+    files: ['**/*.{js,ts}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+    rules: {
+      'external-import-esm/require-external-js-extension': 'error'
+    },
+  },
+];
 ```
 
 ## Examples
