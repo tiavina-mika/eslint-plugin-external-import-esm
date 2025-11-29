@@ -56,14 +56,14 @@ export default [
 ```
 
 ## Examples
-### Incorrect
+### ❌ Incorrect 
 ```js
 import func from 'lib/func'; // Missing .js extension
 import subfunc from 'lib/func/subfunc'; // Missing .js extension
 import plugin from 'dayjs/plugin/something'; // Missing .js extension
 ```
 
-### Correct
+### ✅ Correct
 ```js
 import func from 'lib/func.js';
 import subfunc from 'lib/func/subfunc.js';

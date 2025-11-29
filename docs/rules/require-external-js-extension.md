@@ -17,7 +17,7 @@ This rule enforces using a `.js` extension for modules imported from inside `nod
 but *not* for local or alias-based imports.
 
 ### Examples
-#### Incorrect
+#### ❌ Incorrect
 
 ```js
 import func from 'lib/func'; // Missing .js extension
@@ -25,7 +25,7 @@ import subfunc from 'lib/func/subfunc'; // Missing .js extension
 import plugin from 'dayjs/plugin/something'; // Missing .js extension
 ```
 
-#### Correct
+#### ✅ Correct
 
 ```js
 import func from 'lib/func.js';
