@@ -1,12 +1,14 @@
 const { RuleTester } = require('eslint');
 const plugin = require('../../src');
 
-const ruleTester = new RuleTester({
-    parserOptions: {
+RuleTester.setDefaultConfig({
+    languageOptions: {
         ecmaVersion: 2020,
-        sourceType: 'module'
-    }
+        sourceType: "module",
+    },
 });
+
+const ruleTester = new RuleTester();
 
 ruleTester.run('require-external-js-extension', plugin.rules['require-external-js-extension'], {
   valid: [
