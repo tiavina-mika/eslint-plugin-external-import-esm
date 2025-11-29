@@ -15,3 +15,22 @@ ignoring alias imports like `'@/'` and relative imports like `'./'` or `'../'`.
 
 This rule enforces using a `.js` extension for modules imported from inside `node_modules`  
 but *not* for local or alias-based imports.
+
+### Examples
+#### Incorrect
+
+```js
+import func from 'lib/func'; // Missing .js extension
+import subfunc from 'lib/func/subfunc'; // Missing .js extension
+import plugin from 'dayjs/plugin/something'; // Missing .js extension
+```
+
+#### Correct
+
+```js
+import func from 'lib/func.js';
+import subfunc from 'lib/func/subfunc.js';
+import plugin from 'dayjs/plugin/something.js';
+import myUtil from '@/utils'; // Alias import, no .js needed
+import localModule from './local'; // Relative import, no .js needed
+```
